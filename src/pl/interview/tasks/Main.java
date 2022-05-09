@@ -14,33 +14,38 @@ public class Main {
 
     public static void main(String[] args) {
         int rangeOfSearch = 10000;
+        System.out.println("Number of Lychrel Numbers below 10000: " + numberOfLychrelNumber(rangeOfSearch));
+
+    }
+
+    public static int numberOfLychrelNumber(int rangeOfSearch){
         int numberOfLychrelNumbers = 0;
 
         for(int i = 0; i<rangeOfSearch; i++) {
             if (checkingPalindromicNumber(i))
                 numberOfLychrelNumbers += 1;
         }
-        System.out.println("Number of Lychrel Numbers below 10000: " + numberOfLychrelNumbers);
 
+        return numberOfLychrelNumbers;
     }
 
     public static boolean checkingPalindromicNumber (int number){
-        int countIteration = 10;
+        int countIteration = 50;
         String firstNumber = String.valueOf(number);
         String reverseNumber = "";
         String checkingNumber = "";
 
+        BigInteger bigIntegerFirst;
+        BigInteger bigIntegerReverse;
+
         for (int i=1; i<=countIteration; i++){
             reverseNumber = reverseNumber(firstNumber);
-            checkingNumber = String.valueOf( Integer.valueOf(firstNumber) + Integer.valueOf(reverseNumber) );
 
-//            System.out.println(firstNumber);
-//            System.out.println(reverseNumber);
-//            System.out.println(checkingNumber);
-//            System.out.println();
+            bigIntegerFirst = new BigInteger(firstNumber);
+            bigIntegerReverse = new BigInteger(reverseNumber);
+            checkingNumber = (bigIntegerFirst.add(bigIntegerReverse)).toString();
 
             if (reverseNumber(checkingNumber).equals(checkingNumber)) {
-//                System.out.println("Number: " + number + "   Count interations: " + i + "   Palindromic number: " + checkingNumber);
                 return false;
             } else if (i == countIteration){
                 System.out.println("Lychrel number: " + number + "   (Performed iterations: " + i + ")");
